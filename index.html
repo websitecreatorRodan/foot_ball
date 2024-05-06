@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ronaldo Football Calorie Burn Calculator</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+    
+body {
+    font-family: 'Arial', sans-serif;
+    background: url('images (1).jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    width: 100%;
+    max-width: 450px;
+    border-radius: 10px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.ronaldo-image {
+    width: 100px;
+    height: auto;
+    margin-top: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    border: 2px solid #fff;
+    background: transparent;
+    color: #fff;
+    outline: none;
+}
+
+button {
+    background-color: #4CAF50;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.error {
+    color: #FF6347;
+    margin-top: 10px;
+}
+
+
+
+</style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Football calories Burned Calculator</h1>
+        <img src="images.jpg" alt="Cristiano Ronaldo" class="ronaldo-image">
+        <h3>Make shure u r audio is low</h3>
+    </header>
+    <div class="form-group">
+        <label for="weight">Enter Your Weight (kg):</label>
+        <input type="number" id="weight" min="0" placeholder="Weight in kilograms">
+    </div>
+    <div class="form-group">
+        <label for="time">Time Played (minutes):</label>
+        <input type="number" id="time" min="0" placeholder="Duration in minutes">
+    </div>
+    <button id="calculateButton">Calculate Calories</button>
+    <h2>Calories Burned: <span id="result">0</span> kcal</h2>
+    <div id="error" class="error"></div>
+    <audio id="siiAudio" src="Y2meta.app - RONALDO SIÙUUUUUU - SOUND EFFECT (192 kbps) (1).mp3"></audio>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
+
+
+<script>
+document.getElementById('calculateButton').addEventListener('click', function() {
+    const weight = parseFloat(document.getElementById('weight').value);
+    const time = parseFloat(document.getElementById('time').value);
+    const resultElement = document.getElementById('result');
+    const errorElement = document.getElementById('error');
+    const siiAudio = document.getElementById('siiAudio');
+
+    errorElement.textContent = ''; // Clear any previous errors
+
+    if (isNaN(weight) || weight <= 0) {
+        errorElement.textContent = 'Please enter a valid weight.';
+        return;
+    }
+
+    if (isNaN(time) || time <= 0) {
+        errorElement.textContent = 'Please enter a valid time.';
+        return;
+    }
+
+    const caloriesBurned = calculateCalories(weight, time);
+    resultElement.textContent = caloriesBurned.toFixed(2) + '';
+    siiAudio.play(); // Play the "Siiii!" sound effect
+});
+
+function calculateCalories(weight, time) {
+    // Approximate MET value for playing football is 7
+    const MET = 7;
+    return (MET * 3.5 * weight / 200) * time;
+}
+</script>
